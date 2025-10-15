@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mon Portfolio</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      overflow-y: scroll;
+    }
+
+    /* Style de la barre de défilement */
+    ::-webkit-scrollbar {
+      width: 12px;
+      background-color: #1a0000;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1a0000;
+      border-left: 1px solid #330000;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #660000;
+      border-radius: 0;
+      border: none;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #8B0000;
+    }
+
+    /* Pour Firefox */
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #660000 #1a0000;
+    }
+
+    /* Styles pour les sections d'images */
+    .portfolio-section {
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .portfolio-section img {
+      max-width: 80%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <!-- Section 1 -->
+  <section class="portfolio-section">
+    <img src="portfolio1.png" alt="Projet 1">
+  </section>
+  
+  <!-- Section 2 -->
+  <section class="portfolio-section">
+    <img src="portfolio2.png" alt="Projet 2">
+  </section>
+</body>
+</html>
