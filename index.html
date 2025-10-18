@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -15,26 +15,31 @@
       overflow-y: scroll;
     }
 
+    /* Conteneurs principaux */
+    .desktop-container, .mobile-container {
+      width: 100%;
+    }
+
+    /* Par défaut, masquer le conteneur mobile */
+    .mobile-container {
+      display: none;
+    }
+
     /* Styles pour les appareils mobiles */
     @media (max-width: 768px) {
+      .desktop-container {
+        display: none;
+      }
+      
+      .mobile-container {
+        display: block;
+      }
+      
       .portfolio-section {
         height: auto !important;
         min-height: 100vh;
         padding: 20px 0;
       }
-      
-      .desktop-img {
-        display: none !important;
-      }
-      
-      .mobile-img {
-        display: block !important;
-      }
-    }
-    
-    /* Masquer les images mobiles par défaut */
-    .mobile-img {
-      display: none;
     }
 
     /* Style de la barre de défilement */
@@ -86,36 +91,54 @@
   </style>
 </head>
 <body>
-  <!-- Section 1 -->
-  <section class="portfolio-section">
-    <img src="portfolio1.png" alt="Projet 1" class="desktop-img">
-    <img src="Phoneportfolio1.png" alt="Projet 1 Mobile" class="mobile-img">
-  </section>
-  <section class="portfolio-section">
-    <img src="portfolio2.png" alt="Projet 2" class="desktop-img">
-    <img src="Phoneportfolio2.png" alt="Projet 2 Mobile" class="mobile-img">
-  </section>
-  <section class="portfolio-section">
-    <img src="portfolio3.png" alt="Projet 3" class="desktop-img">
-    <img src="Phoneportfolio3.png" alt="Projet 3 Mobile" class="mobile-img">
-  </section>
-  <section class="portfolio-section">
-    <img src="portfolio4.png" alt="Projet 4" class="desktop-img">
-    <img src="Phoneportfolio4.png" alt="Projet 4 Mobile" class="mobile-img">
-  </section>
-  <section class="portfolio-section">
-    <img src="portfolio5.png" alt="Projet 5" class="desktop-img">
-    <img src="Phoneportfolio5.png" alt="Projet 5 Mobile" class="mobile-img">
-  </section>
-  <section class="portfolio-section">
-    <img src="portfolio6.png" alt="Projet 6" class="desktop-img">
-    <img src="Phoneportfolio6.png" alt="Projet 6 Mobile" class="mobile-img">
-  </section>
+  <!-- Conteneur Desktop -->
+  <div class="desktop-container">
     <section class="portfolio-section">
-    <img src="Phoneportfolio7.png" alt="Projet 7 Mobile" class="mobile-img">
-  </section>
+      <img src="portfolio1.png" alt="Projet 1">
+    </section>
     <section class="portfolio-section">
-    <img src="Phoneportfolio8.png" alt="Projet 8 Mobile" class="mobile-img">
-  </section>
+      <img src="portfolio2.png" alt="Projet 2">
+    </section>
+    <section class="portfolio-section">
+      <img src="portfolio3.png" alt="Projet 3">
+    </section>
+    <section class="portfolio-section">
+      <img src="portfolio4.png" alt="Projet 4">
+    </section>
+    <section class="portfolio-section">
+      <img src="portfolio5.png" alt="Projet 5">
+    </section>
+    <section class="portfolio-section">
+      <img src="portfolio6.png" alt="Projet 6">
+    </section>
+  </div>
+
+  <!-- Conteneur Mobile -->
+  <div class="mobile-container">
+    <section class="portfolio-section">
+      <img src="Phoneportfolio1.png" alt="Projet 1 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio2.png" alt="Projet 2 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio3.png" alt="Projet 3 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio4.png" alt="Projet 4 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio5.png" alt="Projet 5 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio6.png" alt="Projet 6 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio7.png" alt="Projet 7 Mobile">
+    </section>
+    <section class="portfolio-section">
+      <img src="Phoneportfolio8.png" alt="Projet 8 Mobile">
+    </section>
+  </div>
 </body>
 </html>
