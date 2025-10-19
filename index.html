@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -140,5 +140,116 @@
       <img src="Phoneportfolio8.png" alt="Projet 8 Mobile">
     </section>
   </div>
+
+  <script>
+    // Variables globales
+    let isScrolling = true;
+    let scrollSpeed = 0.5; // Vitesse de défilement (en pixels par frame)
+    let isUserInteracting = false;
+    let scrollInterval = null;
+    let resizeTimeout;
+
+    // Détecter si l'appareil est une tablette (version améliorée)
+    function isTablet() {
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isiPad = /ipad/.test(userAgent);
+      const isAndroidTablet = /android.*mobile/.test(userAgent) && window.innerWidth >= 768;
+      const isOtherTablet = /(tablet|kindle|playbook|silk|(puffin(?!.*(IP|AP|WP))))/.test(userAgent);
+      return isiPad || isAndroidTablet || isOtherTablet;
+    }
+
+    // Choisir le bon conteneur en fonction de l'appareil et de l'orientation
+    function setupContainers() {
+      const desktopContainer = document.querySelector('.desktop-container');
+      const mobileContainer = document.querySelector('.mobile-container');
+      
+      if (!desktopContainer || !mobileContainer) return;
+      
+      const isPortrait = window.innerHeight > window.innerWidth;
+      const isMobileView = window.innerWidth <= 768 || (isTablet() && isPortrait);
+      
+      desktopContainer.style.display = isMobileView ? 'none' : 'block';
+      mobileContainer.style.display = isMobileView ? 'block' : 'none';
+    }
+
+    // Fonction pour démarrer le défilement automatique
+    function startAutoScroll() {
+      if (scrollInterval) return;
+      
+      scrollInterval = setInterval(() => {
+        if (!isScrolling || isUserInteracting) return;
+        
+        const scrollPosition = window.scrollY + window.innerHeight;
+        const pageHeight = document.documentElement.scrollHeight;
+        
+        if (scrollPosition >= pageHeight - 5) {
+          isScrolling = false;
+          clearInterval(scrollInterval);
+          scrollInterval = null;
+          return;
+        }
+        
+        window.scrollBy(0, scrollSpeed);
+      }, 16); // Environ 60 FPS
+    }
+
+    // Gestion du redimensionnement avec debounce
+    function handleResize() {
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        setupContainers();
+        
+        // Réinitialiser le défilement après un redimensionnement
+        if (scrollInterval) {
+          clearInterval(scrollInterval);
+          scrollInterval = null;
+        }
+        startAutoScroll();
+      }, 250);
+    }
+
+    // Gestion des interactions utilisateur
+    function handleUserInteraction() {
+      isUserInteracting = true;
+      isScrolling = false;
+      
+      if (scrollInterval) {
+        clearInterval(scrollInterval);
+        scrollInterval = null;
+      }
+      
+      // Réactiver le défilement après 5 secondes d'inactivité
+      clearTimeout(window.userInactivityTimeout);
+      window.userInactivityTimeout = setTimeout(() => {
+        isUserInteracting = false;
+        isScrolling = true;
+        startAutoScroll();
+      }, 5000);
+    }
+
+    // Initialisation
+    document.addEventListener('DOMContentLoaded', function() {
+      // Configurer les conteneurs
+      setupContainers();
+      
+      // Événements
+      window.addEventListener('resize', handleResize);
+      
+      // Gestion des interactions utilisateur
+      const userEvents = ['mousedown', 'wheel', 'touchstart', 'keydown', 'click'];
+      userEvents.forEach(event => {
+        window.addEventListener(event, handleUserInteraction, { passive: true });
+      });
+
+      // Démarrer le défilement automatique après 2 secondes
+      setTimeout(() => {
+        startAutoScroll();
+      }, 2000);
+      
+      // Gestion du changement d'orientation
+      let mql = window.matchMedia('(orientation: portrait)');
+      mql.addListener(handleResize);
+    });
+  </script>
 </body>
 </html>
