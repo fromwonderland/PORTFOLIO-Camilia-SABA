@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -144,8 +144,17 @@
   <script>
     // Variables globales
     let isScrolling = true;
-    let scrollSpeed = 0.5; // Vitesse de défilement (en pixels par frame)
+    let scrollSpeed = 0.5; // Vitesse de défilement par défaut (pour desktop)
     let isUserInteracting = false;
+    
+    // Fonction pour déterminer la vitesse de défilement en fonction de l'appareil
+    function getScrollSpeed() {
+      const isPortrait = window.innerHeight > window.innerWidth;
+      if (window.innerWidth <= 768 || (isTablet() && isPortrait)) {
+        return 1.2; // Vitesse plus rapide pour mobile et tablette en portrait
+      }
+      return 0.5; // Vitesse normale pour desktop et tablette en paysage
+    }
     let scrollInterval = null;
     let resizeTimeout;
 
@@ -189,7 +198,7 @@
           return;
         }
         
-        window.scrollBy(0, scrollSpeed);
+        window.scrollBy(0, getScrollSpeed());
       }, 16); // Environ 60 FPS
     }
 
